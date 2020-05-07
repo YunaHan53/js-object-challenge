@@ -1,19 +1,32 @@
 let html = ''
 let student
+let search
 
-function print(message) {
+function print(html) {
   let outputDiv = document.getElementById('output');
-  outputDiv.innerHTML = message;
+  outputDiv.innerHTML = html;
 }
 
-for (let i = 0; i < students.length; i++) {
-  student = students[i]
-  html += `<h2>Name: ${student.name}</h2>`
-  html += `<ul>`
-  html += `<li>Track: ${student.track}</li>`
-  html += `<li>Achievements: ${student.achievements}</li>`
-  html += `<li>Points: ${student.points}</li>`
-  html += `</ul>`
+function getReport(student) {
+  let report = `<h2>Name: ${student.name}</h2>`
+  report += `<ul><li>Track: ${student.track}</li>`
+  report += `<li>Achievements: ${student.achievements}</li>`
+  report += `<li>Points: ${student.points}</li></ul>`
+  return report
+}
+
+while (true) {
+  search = prompt("Search student records: Type a name, or type 'quit' to end")
+  if (search === null || search.toLowerCase() === 'quit') {
+    break
+  }
+  for (let i = 0; i < students.length; i++) {
+    student = students[i]
+    if ( student.name === search ) {
+      html = getReport( student )
+      print(html)
+    }
+  }
 }
 
 print(html)
